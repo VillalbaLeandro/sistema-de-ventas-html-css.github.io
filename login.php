@@ -8,14 +8,14 @@ include("./head.php");
 </head>
 
 <body>
-<?php
-include("./header.php");
-?>
+    <?php
+    include("./header.php");
+    ?>
     <section class="form-registro"> <!-- Usa la misma clase que en register.php -->
         <h5>Formulario de Login</h5>
         <form class="form-login" action="./ventas/iniciar_sesion.php" method="POST">
-            <input class="controls" type="text" name="usuario" placeholder="Usuario" required>
-            <input class="controls" type="password" name="contrasena" placeholder="Contraseña" required>
+            <input class="controls" type="text" name="nombre" placeholder="Usuario" required>
+            <input class="controls" type="password" name="password" placeholder="Contraseña" required>
             <input class="boton" type="submit" value="Ingresar">
         </form>
         <p>No tienes una cuenta? <a href="./registro.php">Regístrate</a></p>

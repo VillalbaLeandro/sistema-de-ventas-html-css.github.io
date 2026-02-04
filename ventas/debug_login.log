@@ -1,0 +1,63 @@
+2026-02-03 22:12:13 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin
+    [password] => admin
+    [ingresar] => 
+)
+
+2026-02-03 22:16:58 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin
+    [password] => admin
+    [ingresar] => 
+)
+
+2026-02-03 22:19:40 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin
+    [password] => admin
+    [ingresar] => 
+)
+
+2026-02-03 22:19:55 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin
+    [password] => 12324
+    [ingresar] => 
+)
+
+2026-02-03 22:20:01 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin
+    [password] => 12345
+    [ingresar] => 
+)
+
+2026-02-03 22:20:23 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => test
+    [password] => test
+)
+
+2026-02-03 22:37:43 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => admin1
+    [password] => admin1
+    [ingresar] => 
+)
+
+2026-02-04 03:29:14 - Script reached. Method: POST
+POST Data received: Array
+(
+    [nombre] => SuperAdmin
+    [password] => admin1
+    [ingresar] => 
+)
+

@@ -18,7 +18,8 @@ function obtenerTotalVentas($idUsuario = null)
         array_push($parametros, $idUsuario);
     }
     $fila = select($sentencia, $parametros);
-    if ($fila) return  number_format($fila[0]->total, 2);
+    if ($fila)
+        return number_format($fila[0]->total, 2);
 }
 
 function obtenerTotalVentasHoy($idUsuario = null)
@@ -30,7 +31,8 @@ function obtenerTotalVentasHoy($idUsuario = null)
         array_push($parametros, $idUsuario);
     }
     $fila = select($sentencia, $parametros);
-    if ($fila) return number_format($fila[0]->total, 2);
+    if ($fila)
+        return number_format($fila[0]->total, 2);
 }
 function obtenerTotalVentasSemana($idUsuario = null)
 {
@@ -41,7 +43,8 @@ function obtenerTotalVentasSemana($idUsuario = null)
         array_push($parametros, $idUsuario);
     }
     $fila = select($sentencia, $parametros);
-    if ($fila) return number_format($fila[0]->total, 2);
+    if ($fila)
+        return number_format($fila[0]->total, 2);
 }
 
 
@@ -54,7 +57,8 @@ function obtenerTotalVentasMes($idUsuario = null)
         array_push($parametros, $idUsuario);
     }
     $fila = select($sentencia, $parametros);
-    if ($fila) return  number_format($fila[0]->total, 2);
+    if ($fila)
+        return number_format($fila[0]->total, 2);
 }
 
 // Función para obtener todos los productos de la base de datos
@@ -82,7 +86,7 @@ function obtenerNumeroProductos()
 
         return $totalProductos;
     } catch (PDOException $e) {
-        echo "Error al obtener el número de productos: " . $e->getMessage();
+        // echo "Error al obtener el número de productos: " . $e->getMessage();
         return 0;
     } finally {
         if ($conexion) {
@@ -100,7 +104,7 @@ function obtenerSiguienteCodigoProducto()
     $resultado = $sentencia->fetch(PDO::FETCH_OBJ);
 
     // Si no hay productos, el primer código será 1000
-    $ultimoCodigo = isset($resultado->max_codigo) ? (int)$resultado->max_codigo : 999;
+    $ultimoCodigo = isset($resultado->max_codigo) ? (int) $resultado->max_codigo : 999;
 
     // Retorna el siguiente código incrementando el último por 1
     return $ultimoCodigo + 1;
@@ -198,7 +202,8 @@ function obtenerTotalInventario()
 {
     $sentencia = "SELECT IFNULL(SUM(stock * precio_venta),0) AS total FROM producto";
     $fila = select($sentencia);
-    if ($fila) return $fila[0]->total;
+    if ($fila)
+        return $fila[0]->total;
 }
 
 
@@ -206,7 +211,8 @@ function calcularGananciaProductos()
 {
     $sentencia = "SELECT IFNULL(SUM(stock * precio_venta) - SUM(stock*precio_costo),0) AS total FROM producto";
     $fila = select($sentencia);
-    if ($fila) return $fila[0]->total;
+    if ($fila)
+        return $fila[0]->total;
 }
 function insertar($sentencia, $parametros)
 {
@@ -387,10 +393,10 @@ function obtenerClientes()
                 LEFT JOIN categoria_cliente AS cc ON c.categoria_cliente_id = cc.id";
     return select($sentencia);
 }
-function registrarCliente($nombre, $apellido,  $direccion, $fecha_nacimiento, $email, $telefono, $cuil_cuit, $dni, $categoria, $password)
+function registrarCliente($nombre, $apellido, $direccion, $fecha_nacimiento, $email, $telefono, $cuil_cuit, $dni, $categoria, $password)
 {
     $sentencia = "INSERT INTO cliente (nombre, apellido, direccion, fechaNacimiento, email, telefono, cuil_cuit, dni, categoria_cliente_id, pass) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $parametros = [$nombre, $apellido,  $direccion, $fecha_nacimiento, $email, $telefono, $cuil_cuit, $dni, $categoria, $password];
+    $parametros = [$nombre, $apellido, $direccion, $fecha_nacimiento, $email, $telefono, $cuil_cuit, $dni, $categoria, $password];
     return insertar($sentencia, $parametros);
 }
 function obtenerCategoriasCliente()
@@ -403,7 +409,8 @@ function obtenerClientePorId($id)
 {
     $sentencia = "SELECT * FROM cliente WHERE id = ?";
     $cliente = select($sentencia, [$id]);
-    if ($cliente) return $cliente[0];
+    if ($cliente)
+        return $cliente[0];
 }
 
 
@@ -464,7 +471,8 @@ function iniciarSesion($usuario, $password)
     if ($resultado) {
         $usuario = $resultado[0];
         $verificaPass = verificarPassword($usuario->id, $password);
-        if ($verificaPass) return $usuario;
+        if ($verificaPass)
+            return $usuario;
     }
 }
 function verificarPassword($idUsuario, $password)
@@ -472,7 +480,8 @@ function verificarPassword($idUsuario, $password)
     $sentencia = "SELECT `pass` FROM usuario WHERE id = ?";
     $contrasenia = select($sentencia, [$idUsuario])[0]->pass;
     $verifica = password_verify($password, $contrasenia);
-    if ($verifica) return true;
+    if ($verifica)
+        return true;
 }
 function cambiarPassword($idUsuario, $password)
 {
@@ -485,12 +494,14 @@ function obtenerProductoPorCodigo($codigo)
 {
     $sentencia = "SELECT * FROM producto WHERE codigo = ?";
     $producto = select($sentencia, [$codigo]);
-    if ($producto) return $producto[0];
+    if ($producto)
+        return $producto[0];
     return [];
 }
 function agregarProductoALista($producto, $listaProductos)
 {
-    if ($producto->stock < 1) return $listaProductos;
+    if ($producto->stock < 1)
+        return $listaProductos;
 
     $existe = verificarSiEstaEnLista($producto->id, $listaProductos);
 
@@ -518,7 +529,8 @@ function verificarExistencia($idProducto, $listaProductos, $existencia)
 {
     foreach ($listaProductos as $producto) {
         if ($producto->id == $idProducto) {
-            if ($existencia <= $producto->cantidad) return true;
+            if ($existencia <= $producto->cantidad)
+                return true;
         }
     }
     return false;
@@ -593,7 +605,7 @@ function descontarProductos($idProducto, $cantidad)
 }
 function obtenerUltimoIdVenta()
 {
-    $sentencia  = "SELECT id FROM venta ORDER BY id DESC LIMIT 1";
+    $sentencia = "SELECT id FROM venta ORDER BY id DESC LIMIT 1";
     $resultado = select($sentencia);
     if ($resultado) {
         return $resultado[0]->id;
@@ -733,7 +745,7 @@ function registrarCompra($codigo, $cantidad, $precio_compra, $precio_venta, $idP
         $producto = obtenerProductoPorId($idProducto);
         $nuevo_stock = $producto->stock + $cantidad;
         $precio_costo = $precio_compra;
-        $precio_venta = $precio_venta;
+
 
         // Actualización de stock y precios del producto
         $stmt = $conexion->prepare("UPDATE producto SET stock = :stock, precio_costo = :precio_costo, precio_venta = :precio_venta WHERE id = :id");
@@ -911,7 +923,8 @@ function obtenerHistorialCaja()
 //     }
 // }
 
-function registrarEfectivoCaja($fecha, $monto, $descripcion, $entradaSalidaId, $ventaId, $tipo, $compraId) {
+function registrarEfectivoCaja($fecha, $monto, $descripcion, $entradaSalidaId, $ventaId, $tipo, $compraId)
+{
     try {
         $conexion = conectarBaseDatos();
         $stmt = $conexion->prepare("INSERT INTO efectivocaja (fecha, monto, descripcion, entrada_salida_id, venta_id, tipo, compra_id) VALUES (:fecha, :monto, :descripcion, :entrada_salida_id, :venta_id, :tipo, :compra_id)");
@@ -1325,22 +1338,23 @@ function registrarTransaccionCaja($fecha, $monto, $descripcion, $entradaSalidaId
 
 function conectarBaseDatos()
 {
+    // Credenciales LOCALES (Laragon)
     $host = "localhost";
-    $db   = "drinkstore_db";
+    $db = "drinkstore_db";
     $user = "root";
     $pass = "";
     $charset = 'utf8mb4';
 
     $options = [
-        \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
-        \PDO::ATTR_EMULATE_PREPARES   => false,
+        \PDO::ATTR_EMULATE_PREPARES => false,
     ];
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     try {
         $pdo = new \PDO($dsn, $user, $pass, $options);
         return $pdo;
     } catch (\PDOException $e) {
-        throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        throw new \PDOException($e->getMessage(), (int) $e->getCode());
     }
 }
